@@ -10,6 +10,6 @@ before_install:
 - npm install -g yarn
 - yarn --version
 install:
-- yarn instal
+- yarn install
 script:
 - yarn lint
