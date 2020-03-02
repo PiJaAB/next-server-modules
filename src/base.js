@@ -12,7 +12,7 @@ const isDev = !(isProduction || isStaging);
 if (isDev) process.env.NODE_ENV = 'development';
 require('dotenv-load')();
 
-const app = require('next').next({ dev: isDev });
+const app = require('next')({ dev: isDev });
 
 /**
  * Send request to next handler
