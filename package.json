@@ -1,6 +1,6 @@
 {
   "name": "@pija-ab/next-server-modules",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "dependencies": {
     "argon2": "^0.25.1",
     "dotenv-load": "^2.0.0",
@@ -10,6 +10,7 @@
   "peerDependencies": {
     "express": "^4.17.1"
   },
+  "main": "src/index",
   "scripts": {
     "lint": "run-p -l --silent --aggregate-output --continue-on-error lint:*",
     "lint:check-eslint": "eslint --print-config .eslintrc.cjs | eslint-config-prettier-check",
