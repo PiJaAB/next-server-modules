@@ -20,7 +20,7 @@ const minLevel = level => {
 
 /* BABEL CONFIG */
 
-module.exports = {
+module.exports = () => ({
   presets: ['next/babel'],
   plugins: [
     'babel-plugin-transform-class-properties',
@@ -56,4 +56,4 @@ module.exports = {
       ],
     },
   },
-};
+});
