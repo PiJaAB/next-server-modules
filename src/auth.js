@@ -27,9 +27,12 @@ const defaultUsers = [
   },
 ];
 
+const defaultExcludeRoutes = ['manifest.json'];
+
 /**
  *
  * @param {string} [domain]
+ * @param {ReadonlyArray<string>} [extcludedRoutes]
  * @param {ReadonlyArray<{username: string, hash: string}>} [extraUsers]
  */
 function createAuth(
@@ -65,7 +68,7 @@ function createAuth(
   return applyMiddleWareIf(
     auth,
     req =>
-      !excludedRoutes.includes(
+      !(excludedRoutes || defaultExcludeRoutes).includes(
         new URL(req.url, `http://${req.headers.host}`).pathname,
       ),
   );
