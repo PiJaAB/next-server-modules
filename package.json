@@ -1,13 +1,13 @@
 {
   "name": "@pija-ab/next-server-modules",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "dependencies": {
-    "argon2": "^0.25.1",
     "dotenv-load": "^2.0.0",
     "express-basic-auth": "^1.2.0",
     "next": "^9.1.1"
   },
   "peerDependencies": {
+    "argon2": "^0.25.1",
     "express": "^4.17.1"
   },
   "main": "src/index",
