@@ -2,16 +2,6 @@ const basicAuth = require('express-basic-auth');
 
 const applyMiddleWareIf = require('./applyMiddlewareIf');
 
-const argon2 = (() => {
-  try {
-    // eslint-disable-next-line global-require
-    return require('argon2');
-  } catch (err) {
-    err.message = `Failed to import argon2, try running the command 'npm rebuild --update-binary'\nThat worked for me!\n-Linn\n${err.message}`;
-    throw err;
-  }
-})();
-
 const HASH =
   process.env.DEV_ARGON2_HASH ||
   '$argon2i$v=19$m=4096,t=3,p=1$dykrgWHatWg4gdVHe10rUg$sFD2j0mI+nIVB8JmM10g2qDBj+t9OFuRuz1vp4yDhL8';
@@ -40,6 +30,15 @@ function createAuth(
   excludedRoutes = ['manifest.json'],
   extraUsers = [],
 ) {
+  const argon2 = (() => {
+    try {
+      // eslint-disable-next-line global-require
+      return require('argon2');
+    } catch (err) {
+      err.message = `Failed to import argon2, try running the command 'npm rebuild --update-binary'\nThat worked for me!\n-Linn\n${err.message}`;
+      throw err;
+    }
+  })();
   const allUsers = defaultUsers.concat(defaultUsers, extraUsers || []);
 
   const auth = basicAuth({
