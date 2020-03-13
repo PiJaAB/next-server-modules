@@ -32,7 +32,8 @@ function createAuth(
 ) {
   const argon2 = (() => {
     try {
-      // eslint-disable-next-line global-require
+      // This is a peer dependency.
+      // eslint-disable-next-line global-require, import/no-unresolved
       return require('argon2');
     } catch (err) {
       err.message = `Failed to import argon2, try running the command 'npm rebuild --update-binary'\nThat worked for me!\n-Linn\n${err.message}`;
