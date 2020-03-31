@@ -1,6 +1,6 @@
 {
   "name": "@pija-ab/next-server-modules",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "dependencies": {
     "dotenv-load": "^2.0.0",
     "express-basic-auth": "^1.2.0",
