@@ -6,7 +6,7 @@
 
 if (process.env.NODE_ENV == null) process.env.NODE_ENV = 'development';
 if (
-  process.env.NODE_ENV !== 'development' ||
+  process.env.NODE_ENV !== 'development' &&
   process.env.NODE_ENV !== 'production'
 ) {
   console.warn(`NODE_ENV set to unsupported value: ${process.env.NODE_ENV}`);
