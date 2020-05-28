@@ -17,19 +17,28 @@ const isDev = process.env.NODE_ENV === 'development';
 
 const dotenvConfig = require('dotenv').config;
 
-function loadEnv(env = null) {
-  if (env == null) {
-    dotenvConfig({ path: '.env.override' });
-    dotenvConfig({ path: '.env' });
-  } else {
-    dotenvConfig({ path: `.env.${env}.override` });
-    dotenvConfig({ path: `.env.${env}` });
+function loadEnv(envs) {
+  const fullEnvs = [...envs];
+  if (!fullEnvs.includes(null && !fullEnvs.includes(undefined))) {
+    fullEnvs.push(null);
+  }
+  for (const env of fullEnvs) {
+    if (env == null) {
+      dotenvConfig({ path: '.env.local' });
+    } else {
+      dotenvConfig({ path: `.env.${env}.local` });
+    }
+  }
+  for (const env of fullEnvs) {
+    if (env == null) {
+      dotenvConfig({ path: '.env' });
+    } else {
+      dotenvConfig({ path: `.env.${env}` });
+    }
   }
 }
 if (process.env.DEPLOY_ENV == null) process.env.DEPLOY_ENV = 'localdev';
-loadEnv(process.env.DEPLOY_ENV);
-loadEnv(process.env.NODE_ENV);
-loadEnv();
+loadEnv([process.env.DEPLOY_ENV, process.env.NODE_ENV]);
 
 const app = require('next')({ dev: isDev });
 
