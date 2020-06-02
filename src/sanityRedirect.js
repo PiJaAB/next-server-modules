@@ -25,7 +25,7 @@ try {
     }
     if (req.headers.host !== PARSED_BASE.host) sendRedirect = true;
 
-    const match = url.match(/(.+)\/($|\?.*)/);
+    const match = url.match(/^([^?]+)\/($|\?.*)/);
 
     if (match) {
       url = `${match[1]}${match[2]}`;
