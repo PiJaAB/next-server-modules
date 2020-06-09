@@ -44,7 +44,7 @@ function createAuth(
 
   const auth = basicAuth({
     challenge: true,
-    realm: `${process.env.NODE_ENV}.${domain}`,
+    realm: `${process.env.DEPLOY_ENV || process.env.NODE_ENV}.${domain}`,
     authorizer(username, password, cb) {
       let hash = HASH;
       const [user] = allUsers.filter(({ username: u }) =>
