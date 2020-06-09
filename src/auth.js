@@ -19,6 +19,17 @@ const defaultUsers = [
 
 const defaultExcludeRoutes = ['manifest.json'];
 
+const importArgon = () => {
+  try {
+    // This is a peer dependency.
+    // eslint-disable-next-line global-require, import/no-unresolved
+    return require('argon2');
+  } catch (err) {
+    err.message = `Failed to import argon2, try running the command 'npm rebuild --update-binary'\nThat worked for me!\n-Linn\n${err.message}`;
+    throw err;
+  }
+};
+
 /**
  *
  * @param {string} [domain]
@@ -30,16 +41,7 @@ function createAuth(
   excludedRoutes = ['manifest.json'],
   extraUsers = [],
 ) {
-  const argon2 = (() => {
-    try {
-      // This is a peer dependency.
-      // eslint-disable-next-line global-require, import/no-unresolved
-      return require('argon2');
-    } catch (err) {
-      err.message = `Failed to import argon2, try running the command 'npm rebuild --update-binary'\nThat worked for me!\n-Linn\n${err.message}`;
-      throw err;
-    }
-  })();
+  const argon2 = importArgon();
   const allUsers = defaultUsers.concat(defaultUsers, extraUsers || []);
 
   const auth = basicAuth({
@@ -51,6 +53,10 @@ function createAuth(
         basicAuth.safeCompare(username, u),
       );
       if (user) ({ hash } = user);
+      if (!password) {
+        cb(null, false);
+        return;
+      }
       argon2.verify(hash, password).then(
         passwordMatches => {
           // Cybersecurity people want me to use bitwise & to avoid
