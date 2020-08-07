@@ -17,7 +17,7 @@ const defaultUsers = [
   },
 ];
 
-const defaultExcludeRoutes = ['manifest.json'];
+const defaultExcludeRoutes = ['/manifest.json'];
 
 const importArgon = () => {
   try {
@@ -38,7 +38,7 @@ const importArgon = () => {
  */
 function createAuth(
   domain = 'pija.se',
-  excludedRoutes = ['manifest.json'],
+  excludedRoutes = defaultExcludeRoutes,
   extraUsers = [],
 ) {
   const argon2 = importArgon();
