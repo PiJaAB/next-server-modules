@@ -5,7 +5,8 @@
  */
 
 try {
-  const BASE_URL = process.env.NEXT_STATIC_BASE_URL;
+  // Remove trailing slashes from baseURL
+  const BASE_URL = process.env.NEXT_STATIC_BASE_URL.replace(/\/+$/, '');
   const PARSED_BASE = new URL(BASE_URL);
 
   /**
@@ -25,7 +26,7 @@ try {
     }
     if (req.headers.host !== PARSED_BASE.host) sendRedirect = true;
 
-    const match = url.match(/^([^?]+)\/($|\?.*)/);
+    const match = url.match(/^([^?]+?)\/+($|\?.*)/);
 
     if (match) {
       url = `${match[1]}${match[2]}`;
