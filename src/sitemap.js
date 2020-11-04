@@ -38,7 +38,7 @@ function sitemap(conf) {
   }
   // eslint-disable-next-line global-require,import/no-dynamic-require
   const pages = Object.keys(require(parsedConf.pagesManifest)).filter(
-    s => !s.startsWith('/_') && !s.match(/\[[a-z]+\]/),
+    s => !s.startsWith('/_') && !s.match(/\[[a-z]+\]/) && s !== '/404',
   );
 
   let cache = null;
