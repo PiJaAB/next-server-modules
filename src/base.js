@@ -63,11 +63,11 @@ function render404(req, res) {
   Starts the server
   @param {()=>void} init initialize the server.
  */
-const start = init => {
+const start = (init) => {
   app
     .prepare()
     .then(init)
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 };
 
 module.exports = {

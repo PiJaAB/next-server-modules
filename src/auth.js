@@ -58,13 +58,13 @@ function createAuth(
         return;
       }
       argon2.verify(hash, password).then(
-        passwordMatches => {
+        (passwordMatches) => {
           // Cybersecurity people want me to use bitwise & to avoid
           // optimizations that could make us vulnerable to timing attacks
           // eslint-disable-next-line no-bitwise
           cb(null, Boolean(user) & passwordMatches);
         },
-        err => {
+        (err) => {
           cb(err, null);
         },
       );
@@ -73,7 +73,7 @@ function createAuth(
   });
   return applyMiddleWareIf(
     auth,
-    req =>
+    (req) =>
       !(excludedRoutes || defaultExcludeRoutes).includes(
         new URL(req.url, `http://${req.headers.host}`).pathname,
       ),

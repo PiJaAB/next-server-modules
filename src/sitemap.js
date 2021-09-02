@@ -34,11 +34,11 @@ function sitemap(conf) {
     if (!Array.isArray(conf.dynamic)) {
       parsedConf.dynamic = [conf.dynamic];
     }
-    dynamic = parsedConf.dynamic.map(o => ({ ...o }));
+    dynamic = parsedConf.dynamic.map((o) => ({ ...o }));
   }
   // eslint-disable-next-line global-require,import/no-dynamic-require
   const pages = Object.keys(require(parsedConf.pagesManifest)).filter(
-    s => !s.startsWith('/_') && !s.match(/\[[a-z]+\]/) && s !== '/404',
+    (s) => !s.startsWith('/_') && !s.match(/\[[a-z]+\]/) && s !== '/404',
   );
 
   let cache = null;
@@ -62,7 +62,7 @@ function sitemap(conf) {
         smStream.write({ url: page });
       }
       dynamic = await Promise.all(
-        dynamic.map(async dynConf => ({
+        dynamic.map(async (dynConf) => ({
           ...dynConf,
           urls: (await axios.get(dynConf.listUrl)).data,
         })),
