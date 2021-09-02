@@ -1,6 +1,6 @@
 {
   "name": "@pija-ab/next-server-modules",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "dependencies": {
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
